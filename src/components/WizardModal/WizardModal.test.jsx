@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import { Loading } from 'carbon-components-react';
+import { Loading, Button } from 'carbon-components-react';
 
 import WizardModal from './WizardModal';
 
@@ -10,6 +10,20 @@ const commonWizardProps = {
 };
 
 describe('WizardModal', () => {
+  test('renderButtons', () => {
+    const wrapper = mount(
+      <WizardModal
+        {...commonWizardProps}
+        steps={[
+          { label: 'step1', content: 'page 1' },
+          { label: 'step2', content: 'page 2' },
+          { label: 'step3', content: 'page 3' },
+        ]}
+      />
+    );
+    // Cancel, Next button
+    expect(wrapper.find(Button)).toHaveLength(2);
+  });
   test('handleNext', () => {
     const mockValidateStepFunction = jest.fn();
     const wrapper = mount(
